@@ -1,0 +1,131 @@
+/* Your app's CSS, go crazy, make it your own */
+.scroll-content {
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+}
+
+.ionic-logo {
+  display: block;
+  margin: 15px auto;
+  width: 96px;
+  height: 96px;
+}
+.blue {
+  color: #4d8fc8;
+}
+.blue, .item .blue, .ion-waterdrop, .ion-umbrella {
+  color: steelblue;
+}
+.red, .item .red, .ion-thermometer {
+    color: #b5152b;
+}
+.purple, .ion-leaf {
+  color: #8c52e2;
+}
+.green, .pressure, .ion-connection-bars {
+  color: #5c8843;
+}
+.ion-lightbulb {
+  color: yellow;
+}
+.ion-speakerphone {
+  color: gray;
+}
+.ion-grid {
+  color: black;
+}
+
+.bar.bar-positive {
+  /*background-color: #145DD7;*/
+}
+path {
+  stroke-width: 2;
+  fill: none;
+  stroke: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+  stroke-width: 1;
+}
+
+.x.axis line {
+  stroke: #666;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path {
+  stroke: #666;
+}
+.axis text {
+  fill: #ededed;
+  font-size: 12px;
+}
+.axis.hours text {
+  fill: #ccc;
+  font-size:2rem;
+  font-family: "IonIcons";
+  opacity: 0.8;
+}
+.axis.hours path {
+  fill: none;
+  stroke: none;
+}
+
+.axis.days path, line {
+  stroke: #ccc;
+}
+.axis.days path, line {
+  stroke: none;
+}
+
+.item {
+  border:0;
+  border-radius:0;
+
+}
+
+
+.item > .icon {
+  float: left;
+  font-size: 60px;
+  line-height: 60px;
+  margin-right: 15px;
+}
+.card, .list, .item {
+  color: white;
+  font-size: larger;
+  background: rgba(0, 0, 0, 0.2);
+}
+.item h1, .item h2, .item h3, .item h4, .item h5 {
+  color: #666;
+}
+.item h3 {
+  font-size: 28px;
+}
+.item p { 
+  font-size: 36px;
+  line-height: 1;
+  color: #ededed;
+}
+.item span {
+  font-size: 24px;
+  line-height: 1;
+  color: #666;
+}
+
+.textcontent {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ededed;
+}
+.tab-item {
+    color: #8c52e2;
+}

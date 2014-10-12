@@ -1,0 +1,77 @@
+<ion-view title="Stova"
+    on-refresh="onRefresh()"
+>
+  <refresher></refresher>
+  <ion-content class="padding">
+    <div class="card">
+      <div class="item">
+        <i class="icon ion-thermometer"></i>
+        <div style="float:right;">
+          <h5>
+            <span>↑ <span>{{ current.highTemp.temp }}</span></span>
+            <span>↓ <span>{{ current.lowTemp.temp  }}</span></span>
+          </h5>
+        </div>
+        <p>{{ current.rtemp | temperature  }}</p>
+        <h3>Temp</h3>
+        <div linechart data="current.tempdata" type="temp" label="d3Label" xdata="current.txdata"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <i class="icon ion-grid"></i>
+        <div style="float:right;">
+          <h5>
+            <span>↑ <span>{{ current.highVoc.voc }}</span></span>
+            <span>↓ <span>{{ current.lowVoc.voc  }}</span></span>
+          </h5>
+        </div>
+        <p>{{ current.voc | voc}}</p>
+        <h3>Air Quality Level</h3>
+        <div linechart data="current.vocdata" type="voc" label="d3Label" color1="black" xdata="current.txdata"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <i class="icon ion-waterdrop"></i>
+        <div style="float:right;">
+          <h5>
+            <span>↑ <span>{{ current.highHumidity.humidity }}</span></span>
+            <span>↓ <span>{{ current.lowHumidity.humidity }}</span></span>
+          </h5>
+        </div>
+        <p>{{ current.humidity | humidity  }}</p>
+        <h3>Humidity</h3>
+        <div linechart data="current.humiditydata" type="humidity" label="d3Label" color1="steelblue" xdata="current.txdata"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <i class="icon ion-lightbulb"></i>
+        <div style="float:right;">
+          <h5>
+            <span>↑ <span>{{ current.highLight.light }}</span></span>
+            <span>↓ <span>{{ current.lowLight.light }}</span></span>
+          </h5>
+        </div>
+        <p>{{ current.light }} lux</p>
+        <h3>Light</h3>
+        <div linechart data="current.lightdata" type="light" color1="yellow" label="d3Label" xdata="current.txdata"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item">
+        <i class="icon ion-speakerphone"></i>
+        <div style="float:right;">
+          <h5>
+            <span>↑ <span>{{ current.highNoise.noise }}</span></span>
+            <span>↓ <span>{{ current.lowNoise.noise }}</span></span>
+          </h5>
+        </div>
+        <p>{{ current.noise }} rms</p>
+        <h3>Noise</h3>
+        <div linechart data="current.noisedata" type="noise" color1="gray" label="d3Label" xdata="current.txdata"></div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
