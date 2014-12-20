@@ -43,11 +43,11 @@ angular.module('starter.services', [])
             current.lowHumidity = data.data[0];
         })
     }).then(function(){
-        $http.jsonp("/api/"+cubeId+"/record/noise/max?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+        $http.jsonp("/api/"+cubeId+"/record/noisedba/max?start=today&callback=JSON_CALLBACK").then(function(data, status) {
             current.highNoise = data.data[0];
         })
     }).then(function(){
-        $http.jsonp("/api/"+cubeId+"/record/noise/min?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+        $http.jsonp("/api/"+cubeId+"/record/noisedba/min?start=today&callback=JSON_CALLBACK").then(function(data, status) {
             current.lowNoise = data.data[0];
         })
     }).then(function(){
@@ -65,7 +65,7 @@ angular.module('starter.services', [])
               vocdata.push(entry.voc);
               humiditydata.push(entry.humidity);
               lightdata.push(entry.light);
-              noisedata.push(entry.noise);
+              noisedata.push(entry.noisedba);
               // Add d3 js date for each datum. Tell it that the date is UTC
               xdata.push(parseDate(entry.time+"+0000"));
           });

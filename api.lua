@@ -221,9 +221,9 @@ function by_dateunit(match)
         MIN(light) as lightmin,
         AVG(light) as light,
         MAX(light) as lightmax,
-        MIN(noise) as noisemin,
-        AVG(noise) as noise,
-        MAX(noise) as noisemax
+        MIN(noisedba) as noisedbamin,
+        AVG(noisedba) as noisedba,
+        MAX(noisedba) as noisedbamax
     FROM ]]..table..[[
     ]]..where..[[
     GROUP BY 1

@@ -64,11 +64,11 @@
         <i class="icon ion-speakerphone"></i>
         <div style="float:right;">
           <h5>
-            <span>↑ <span>{{ current.highNoise.noise }}</span></span>
-            <span>↓ <span>{{ current.lowNoise.noise }}</span></span>
+            <span>↑ <span>{{ current.highNoise.noisedba }}</span></span>
+            <span>↓ <span>{{ current.lowNoise.noisedba }}</span></span>
           </h5>
         </div>
-        <p>{{ current.noise }} rms</p>
+        <p>{{ current.noisedba }} dBA</p>
         <h3>Noise</h3>
         <div linechart data="current.noisedata" type="noise" color1="gray" label="d3Label" xdata="current.txdata"></div>
       </div>
