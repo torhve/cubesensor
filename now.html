@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="nn">
+  <head>
+    <meta charset="utf-8">
+    <title>Nå</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Tor Hveem">
+
+    <style>
+        @import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,600italic);
+        body {
+            background: #222426;
+            color: rgba(255,255,255,0.8);
+            font: 15px/22px 'Open Sans',Arial,Helvetica,sans-serif;
+        }
+        #holder {
+            left: 50%;
+            top: 25%;
+            position: absolute;
+            width: 960px;
+            height: 800px;
+            margin-left: -480px;
+            margin-top:  -200px;
+            text-align: center;
+        }
+        #holder h1 {
+          font-size: 128px;
+        }
+        #holder h2 {
+        }
+        #holder div {
+        }
+        footer {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            opacity: 0.1;
+        }
+
+        .unit, .desc {
+          color: rgba(255,255,255,0.3);
+        }
+        .val {
+          font-weight: strong;
+          font-size: 22px;
+        }
+/* from codepen.io abensur/dzfH */
+.thermometer, .thermometer--very-low, .thermometer--low, .thermometer--moderate, .thermometer--high, .thermometer--very-high {
+  max-width: 80%;
+  margin: 2rem auto;
+}
+.thermometer .liquid, .thermometer--very-low .liquid, .thermometer--low .liquid, .thermometer--moderate .liquid, .thermometer--high .liquid, .thermometer--very-high .liquid {
+  display: block;
+  width: 100%;
+  height: 1.275rem;
+  border: 1px solid #d2d2d2;
+  border-radius: 10px;
+  margin: .25rem auto 0;
+  position: relative;
+}
+.thermometer .liquid:before, .thermometer--very-low .liquid:before, .thermometer--low .liquid:before, .thermometer--moderate .liquid:before, .thermometer--high .liquid:before, .thermometer--very-high .liquid:before {
+  position: absolute;
+  content: "";
+  height: 70%;
+  left: 3px;
+  top: 14%;
+  border-radius: 10px;
+  -webkit-transition: width .3s ease;
+          transition: width .3s ease;
+}
+.thermometer .ruler, .thermometer--very-low .ruler, .thermometer--low .ruler, .thermometer--moderate .ruler, .thermometer--high .ruler, .thermometer--very-high .ruler {
+  height: .625rem;
+  width: 100%;
+  margin-left: 2px;
+}
+line {
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+.thermometer .ruler .ticks--very-low, .thermometer--very-low .ruler .ticks--very-low, .thermometer--low .ruler .ticks--very-low, .thermometer--moderate .ruler .ticks--very-low, .thermometer--high .ruler .ticks--very-low, .thermometer--very-high .ruler .ticks--very-low {
+  stroke: #249AA7;
+}
+.thermometer .ruler .ticks--low, .thermometer--very-low .ruler .ticks--low, .thermometer--low .ruler .ticks--low, .thermometer--moderate .ruler .ticks--low, .thermometer--high .ruler .ticks--low, .thermometer--very-high .ruler .ticks--low {
+  stroke: #B8E1F2;
+}
+.thermometer .ruler .ticks--moderate, .thermometer--very-low .ruler .ticks--moderate, .thermometer--low .ruler .ticks--moderate, .thermometer--moderate .ruler .ticks--moderate, .thermometer--high .ruler .ticks--moderate, .thermometer--very-high .ruler .ticks--moderate {
+  stroke: #ABD25E;
+}
+.thermometer .ruler .ticks--high, .thermometer--very-low .ruler .ticks--high, .thermometer--low .ruler .ticks--high, .thermometer--moderate .ruler .ticks--high, .thermometer--high .ruler .ticks--high, .thermometer--very-high .ruler .ticks--high {
+  stroke: #F8C830;
+}
+.thermometer .ruler .ticks--very-high, .thermometer--very-low .ruler .ticks--very-high, .thermometer--low .ruler .ticks--very-high, .thermometer--moderate .ruler .ticks--very-high, .thermometer--high .ruler .ticks--very-high, .thermometer--very-high .ruler .ticks--very-high {
+  stroke: #F1594A;
+}
+.thermometer--very-low {
+  color: #249AA7;
+}
+.thermometer--very-low strong:before {
+  content: " freezing";
+}
+.thermometer--very-low .liquid:before {
+  background: #249AA7;
+  width: 10%;
+}
+.thermometer--low {
+  color: #B8E1F2;
+}
+.thermometer--low strong:before {
+  content: " cold";
+}
+.thermometer--low .liquid:before {
+  background: #B8E1F2;
+  width: 30%;
+}
+.thermometer--moderate {
+  color: #ABD25E;
+}
+.thermometer--moderate strong:before {
+  content: " ok";
+}
+.thermometer--moderate .liquid:before {
+  background: #ABD25E;
+  width: 50%;
+}
+.thermometer--high {
+  color: #F8C830;
+}
+.thermometer--high strong:before {
+  content: " hot";
+}
+.thermometer--high .liquid:before {
+  background: #F8C830;
+  width: 70%;
+}
+.thermometer--very-high {
+  color: #F1594A;
+}
+.thermometer--very-high strong:before {
+  content: " blazing";
+}
+.thermometer--very-high .liquid:before {
+  background: #F1594A;
+  width: 99%;
+}
+
+.chart-gauge {
+  width: 480px;
+}
+
+.chart-color1 {
+  /*
+  fill: #DEA82C;
+  */
+  fill: #ABD25E;
+}
+
+.chart-color2 {
+  /*
+  fill: #E9621A;
+  */
+  fill: #F8C830;
+}
+
+.chart-color3 {
+  /*
+  fill: #e92213;
+  */
+  fill: #F1594A;
+}
+#humgauge .chart-color1, #humgauge .chart-color2,  #humgauge .chart-color9 , #humgauge .chart-color10{
+  fill: #F1594A;
+}
+#humgauge .chart-color3 , #humgauge .chart-color4 , #humgauge .chart-color6 , #humgauge .chart-color7, #humgauge .chart-color8{
+
+  fill: #F8C830;
+}
+#humgauge .chart-color5 {
+  fill: #ABD25E;
+}
+
+.needle,
+.needle-center {
+  fill: #464A4F;
+}
+
+    </style>
+
+
+  </head>
+
+  <body>
+
+    <div id="holder">
+        <h1 id="time"></h1>
+        <h2 id="date"></h2>
+        <div id="vals">
+          <span class="desc">Ute:</span>
+          <span class="val" id="out"></span>
+          <span class="unit"> °C</span>
+          <span class="desc">Inne:</span>
+          <span class="val thermometer--low" id="inside"></span>
+          <span class="unit"> °C</span>
+          <span class="desc">Luftkvalitet:</span>
+          <span class="val" id="voc"></span>
+          <span class="unit"> ppm</span>
+          <span class="desc">Luftfuktighet:</span>
+          <span class="val" id="hum"></span>
+          <span class="unit"> %</span>
+        </div>
+
+        <div class="thermometer--very-low">
+          <span>Temp is <strong></strong></span>
+          <div class="glass">
+            <div class="liquid"></div>
+            <svg class="ruler">
+              <rect x="0px" y="0" width="20%" height="100%" fill="url(#ticks--very-low)"  rx="2"/>
+              <rect x="20%" y="0" width="20%" height="100%" fill="url(#ticks--low)"  rx="2"/>
+              <rect x="40%" y="0" width="20%" height="100%" fill="url(#ticks--moderate)"  rx="2"/>
+              <rect x="60%" y="0" width="20%" height="100%" fill="url(#ticks--high)"  rx="2"/>
+              <rect x="80%" y="0" width="20%" height="100%" fill="url(#ticks--very-high)"  rx="2"/>
+              <defs>
+              <pattern id="ticks--very-low" class="ticks--very-low" width="60px" height="100%" patternUnits="userSpaceOnUse" x="0">
+              <line x1="1px" x2="1px" y2="6px" />
+              <line x1="12px" x2="12px" y2="6px" />
+              <line x1="24px" x2="24px" y2="6px" />     
+              <line x1="36px" x2="36px" y2="6px" />
+              <line x1="48px" x2="48px" y2="10px" />
+              </pattern>
+              <pattern id="ticks--low" class="ticks--low" width="60px" height="100%" patternUnits="userSpaceOnUse" x="0">
+              <line x1="1px" x2="1px" y2="6px" />
+              <line x1="12px" x2="12px" y2="6px" />
+              <line x1="24px" x2="24px" y2="6px" />     
+              <line x1="36px" x2="36px" y2="6px" />
+              <line x1="48px" x2="48px" y2="10px" />
+              </pattern>
+              <pattern id="ticks--moderate" class="ticks--moderate" width="60px" height="100%" patternUnits="userSpaceOnUse" x="0">
+              <line x1="1px" x2="1px" y2="6px" />
+              <line x1="12px" x2="12px" y2="6px" />
+              <line x1="24px" x2="24px" y2="6px" />     
+              <line x1="36px" x2="36px" y2="6px" />
+              <line x1="48px" x2="48px" y2="10px" />
+              </pattern>
+              <pattern id="ticks--high" class="ticks--high" width="60px" height="100%" patternUnits="userSpaceOnUse" x="0">
+              <line x1="1px" x2="1px" y2="6px" />
+              <line x1="12px" x2="12px" y2="6px" />
+              <line x1="24px" x2="24px" y2="6px" />     
+              <line x1="36px" x2="36px" y2="6px" />
+              <line x1="48px" x2="48px" y2="10px" />
+              </pattern>
+              <pattern id="ticks--very-high" class="ticks--very-high" width="60px" height="100%" patternUnits="userSpaceOnUse" x="0">
+              <line x1="1px" x2="1px" y2="6px" />
+              <line x1="12px" x2="12px" y2="6px" />
+              <line x1="24px" x2="24px" y2="6px" />     
+              <line x1="36px" x2="36px" y2="6px" />
+              <line x1="48px" x2="48px" y2="10px" />
+              </pattern>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <td>
+              <span>Luftkvalitet</span>
+              <div id="airgauge" class="chart-gauge"></div>
+            </td>
+            <td>
+              <span>Luftfuktighet</span>
+              <div id="humgauge" class="chart-gauge"></div>
+            </td>
+          </tr>
+        </table>
+    </div>
+    <footer class="footer">
+        &copy; Tor Hveem 2015 
+    </footer>
+    </div> <!-- /container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js"></script>
+<script>
+var perfis = ['very-low', 'low', 'moderate', 'high', 'very-high'];
+var days = ["Sundag","Mondag","Tirsdag","Onsdag","Torsdag","Fredag","Laurdag"];
+var months = ["Januar","Februar","Mars","April","Mai","Juni","Juli","August","September","Oktober","Desember"];
+var tp = d3.format("02d");
+var of = d3.format("02.1f");
+
+var every_second = function() {
+    var d = new Date();
+    document.getElementById("time").innerHTML = tp(d.getHours()) + " " + tp(d.getMinutes()) + " " + tp(d.getSeconds());
+    document.getElementById("date").innerHTML = days[d.getDay()] + " " +  d.getDate() + ". " + months[d.getMonth()-1];
+}
+every_second();
+setInterval(every_second, 1000);
+
+var fetch_and_render = function(url, accessor, element)  {
+    d3.json(url, function(error, json) {
+      if (error) return console.warn(error);
+      d3.select(element).text(accessor(json));
+    });
+}
+/* gauges from http://jaketrent.com/post/rotate-gauge-needle-in-d3/ */
+var drawGauge = function(element, percent, numSections) {
+  var Needle, arc, arcEndRad, arcStartRad, barWidth, chart, chartInset, degToRad, el, endPadRad, height, margin, needle, padRad, percToDeg, percToRad, radius, sectionIndx, sectionPerc, startPadRad, svg, totalPercent, width, _i;
+
+  barWidth = 40;
+  sectionPerc = 1 / numSections / 2;
+  padRad = 0.05;
+  chartInset = 10;
+  totalPercent = .75;
+  element = d3.select(element);
+
+  margin = {
+    top: 20,
+    right: 20,
+    bottom: 30,
+    left: 20
+  };
+
+  width = element[0][0].offsetWidth - margin.left - margin.right;
+  height = width;
+  radius = Math.min(width, height) / 2;
+
+  percToDeg = function(perc) {
+    return perc * 360;
+  };
+
+  percToRad = function(perc) {
+    return degToRad(percToDeg(perc));
+  };
+
+  degToRad = function(deg) {
+    return deg * Math.PI / 180;
+  };
+
+  svg = element.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+
+  chart = svg.append('g').attr('transform', "translate(" + ((width + margin.left) / 2) + ", " + ((height + margin.top) / 2) + ")");
+
+  for (sectionIndx = _i = 1; 1 <= numSections ? _i <= numSections : _i >= numSections; sectionIndx = 1 <= numSections ? ++_i : --_i) {
+    arcStartRad = percToRad(totalPercent);
+    arcEndRad = arcStartRad + percToRad(sectionPerc);
+    totalPercent += sectionPerc;
+    startPadRad = sectionIndx === 0 ? 0 : padRad / 2;
+    endPadRad = sectionIndx === numSections ? 0 : padRad / 2;
+    arc = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth).startAngle(arcStartRad + startPadRad).endAngle(arcEndRad - endPadRad);
+    chart.append('path').attr('class', "arc chart-color" + sectionIndx).attr('d', arc);
+  }
+
+  Needle = (function() {
+    function Needle(len, radius) {
+      this.len = len;
+      this.radius = radius;
+    }
+
+    Needle.prototype.drawOn = function(el, perc) {
+      el.append('circle').attr('class', 'needle-center').attr('cx', 0).attr('cy', 0).attr('r', this.radius);
+      return el.append('path').attr('class', 'needle').attr('d', this.mkCmd(perc));
+    };
+
+    Needle.prototype.animateOn = function(el, perc) {
+      var self;
+      self = this;
+      return el.transition().delay(500).ease('elastic').duration(3000).selectAll('.needle').tween('progress', function() {
+        return function(percentOfPercent) {
+          var progress;
+          progress = percentOfPercent * perc;
+          return d3.select(this).attr('d', self.mkCmd(progress));
+        };
+      });
+    };
+
+    Needle.prototype.mkCmd = function(perc) {
+      var centerX, centerY, leftX, leftY, rightX, rightY, thetaRad, topX, topY;
+      thetaRad = percToRad(perc / 2);
+      centerX = 0;
+      centerY = 0;
+      topX = centerX - this.len * Math.cos(thetaRad);
+      topY = centerY - this.len * Math.sin(thetaRad);
+      leftX = centerX - this.radius * Math.cos(thetaRad - Math.PI / 2);
+      leftY = centerY - this.radius * Math.sin(thetaRad - Math.PI / 2);
+      rightX = centerX - this.radius * Math.cos(thetaRad + Math.PI / 2);
+      rightY = centerY - this.radius * Math.sin(thetaRad + Math.PI / 2);
+      return "M " + leftX + " " + leftY + " L " + topX + " " + topY + " L " + rightX + " " + rightY;
+    };
+
+    return Needle;
+
+  })();
+
+  needle = new Needle(90, 15);
+  needle.drawOn(chart, 0);
+  needle.animateOn(chart, percent);
+  return [chart, needle];
+
+}
+
+var o = drawGauge('#airgauge', 0, 3);
+var airchart = o[0],
+    airneedle = o[1];
+var o = drawGauge('#humgauge', 0, 10);
+var humchart = o[0],
+    humneedle = o[1];
+var every_minute = function() {
+    fetch_and_render('http://yr.hveem.no/api/now', function(d) { return of(d[0].outtemp) }, '#out');
+    d3.json("http://cube.hveem.no/api/000D6F0003E16037/current", function(error, json) {
+      if (error) return console.warn(error);
+      d3.select('#inside').text(of(json[0].rtemp));
+      d3.select('#voc').text(parseInt(json[0].voc));
+      d3.select('#hum').text(parseInt(json[0].humidity));
+      var t = json[0].rtemp;
+      var val = 0;
+      if (t > 26)   val = 4;
+      else if(t>23) val = 3;
+      else if(t>21) val = 2;
+      else if(t>19) val = 1;
+      d3.select('[class^=thermometer]')[0][0].classList = '';
+      d3.select('[class^=thermometer]').classed('thermometer--'+perfis[val],true);
+
+      var v = json[0].voc;
+      v = v/3200;
+      airneedle.animateOn(airchart, v);
+      humneedle.animateOn(humchart, json[0].humidity/100);
+    });
+}
+every_minute();
+setInterval(every_minute, 1000*60);
+
+
+setInterval(function() {
+}, 3500);
+
+
+</script>
+  </body>
+</html>
