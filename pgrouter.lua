@@ -36,6 +36,8 @@ for pattern, view in pairs(routes) do
         if callback then
             ret = callback .. '(' .. ret .. ');'
         end
+        -- Allow CORS
+        ngx.header['Access-Control-Allow-Origin'] = '*';
         -- Print the returned res
         ngx.print(ret)
         -- If not given exit, then assume OK
