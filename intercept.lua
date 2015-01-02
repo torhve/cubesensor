@@ -34,8 +34,7 @@ local dbreq = function(sql)
   if not ok then
     p(err)
   end
-  local res
-  res, err = db:query(sql)
+  local res res, err = db:query(sql)
   if not res then
     return cjson.encode(err)
   end
@@ -75,6 +74,10 @@ if success then
             elseif key == 'humidity' then
                 val = val/100
             end
+            -- Convert boolean to string values
+            if type(val) == 'boolean' then
+                val = "'"..tostring(val).."'"
+            end
             table.insert(values, val)
         end
         keys[#keys + 1] = 'time'
@@ -87,8 +90,11 @@ if success then
             (]] .. keys .. [[)
             VALUES (]] .. values .. [[)
         ]]
-        p(sql)
-        dbreq(sql)
+        local res = dbreq(sql)
+        if res ~= '{}' then
+            p(sql)
+            p(res)
+        end
       end
     end
   end)
