@@ -1,5 +1,6 @@
 CREATE TABLE data_000D6F0003E16037 (
     "time" timestamp UNIQUE,
+    "hardware" real,
     "temp" real, 
     "pressure" real, 
     "humidity" real, 
@@ -22,6 +23,7 @@ ALTER TABLE ONLY data_000D6F0003E16037
 
 CREATE TABLE data_000D6F0003117ED0 (
     "time" timestamp UNIQUE,
+    "hardware" real,
     "temp" real, 
     "pressure" real, 
     "humidity" real, 
