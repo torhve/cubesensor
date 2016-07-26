@@ -1,5 +1,6 @@
 local cjson = require('cjson')
 local pg = require("resty.postgres")
+local ngx = require'ngx'
 local conf = false
 
 -- Debugging
@@ -50,7 +51,7 @@ local success, jdata = pcall(function()
   return cjson.decode(body)
 end)
 if success then
-  local success, err = pcall(function()
+  local ok, err = pcall(function()
     local data = jdata.data
     if data then
       local time = jdata.time
@@ -81,24 +82,45 @@ if success then
             table.insert(values, val)
         end
         keys[#keys + 1] = 'time'
-        keys = table.concat(keys, ',')
         values[#values + 1] = "date_trunc('minute', to_timestamp(" .. tostring(time) .. "))"
-        values = table.concat(values, ',')
-        local sql = [[ 
+        local sql = [[
             INSERT INTO
             data_]] .. id .. [[
-            (]] .. keys .. [[)
-            VALUES (]] .. values .. [[)
+            (]] .. table.concat(keys, ',') .. [[)
+            VALUES (]] .. table.concat(values, ',') .. [[)
         ]]
         local res = dbreq(sql)
         if res ~= '{}' then
             p(sql)
             p(res)
         end
+
+        -- Insert data into influxdb
+        local influxdata = {}
+        local m2pt = function(id2, field, value)
+            if value == 'false' then
+                value = 0
+            elseif value == 'true' then
+                value = 1
+            end
+            if field == 'temp' then
+                value = value/100
+            end
+            return string.format("%s,id=%s value=%f", field, id2, value)
+        end
+        -- Skip last key which is time
+        for i=1,#keys-1 do
+            table.insert(influxdata, m2pt(id, keys[i], values[i]))
+        end
+        local database = 'cubes'
+        influxdata = table.concat(influxdata, '\n')
+        local _ = ngx.location.capture('/write?db='..database,
+            { method = ngx.HTTP_POST, body = influxdata }
+        )
       end
     end
   end)
-  if not (success) then
+  if not (ok) then
     p("Error with inserting data: " .. tostring(err))
   end
 end
